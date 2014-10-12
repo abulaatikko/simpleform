@@ -1,0 +1,26 @@
+doctype html
+html(lang="en", ng-app="simpleform")
+  head
+    meta(charset="utf-8")
+    meta(http-equiv="X-UA-Compatible", content="IE=edge")
+    meta(name="viewport", content="width=device-width, initial-scale=1")
+    if is_dev
+      link(href="css/client.concat.css", rel="stylesheet")
+    else
+      link(href="css/client.min.css", rel="stylesheet")
+  body
+    .container
+      .row
+        if is_prod
+          h2(class="text-center bg-danger") Production
+        else
+          h2(class="text-center bg-success") Development
+      .row
+        div(class="col-sm-4 col-sm-offset-4")
+          div(ui-view)
+
+  if is_dev
+    script(src="js/client.concat.js")
+    script(src="//pulu.org:35729/livereload.js")
+  else
+    script(src="js/client.min.js")

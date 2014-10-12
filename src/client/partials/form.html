@@ -1,0 +1,23 @@
+<h1 class="text-center">Ciao {{yourName}}!</h1>
+
+<form role="form">
+    <div class="form-group">
+        <div class="row">
+            <div class="col-sm-9">
+                <label for="yourName">Your name</label>
+                <input type="text" ng-model="yourName" id="yourName" class="form-control">
+            </div>
+            <div class="col-sm-3">
+                <span ng-show="yourName" class="glyphicon glyphicon-ok yourNameGiven"></span>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <label>Image</label>
+        <input type="file" name="image" class="form-control">
+    </div>
+    <div class="form-group">
+        <label>Description</label>
+        <textarea name="description" class="form-control"></textarea>
+    </div>
+</form>

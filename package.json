@@ -1,0 +1,36 @@
+{
+  "name": "simpleform",
+  "version": "0.0.2",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Lassi Heikkinen",
+  "license": "ISC",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/lassiheikkinen/simpleform.git"
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-bower-concat": "^0.3.0",
+    "grunt-concat-css": "^0.3.1",
+    "grunt-contrib-clean": "^0.6.0",
+    "grunt-contrib-concat": "^0.5.0",
+    "grunt-contrib-copy": "^0.6.0",
+    "grunt-contrib-jade": "^0.12.0",
+    "grunt-contrib-jshint": "^0.10.0",
+    "grunt-contrib-mincss": "^0.3.2",
+    "grunt-contrib-qunit": "^0.5.2",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-touch": "^0.1.0"
+  },
+  "dependencies": {
+    "express": "^4.9.3",
+    "express-myconnection": "^1.0.4",
+    "mysql": "^2.5.1",
+    "path": "^0.4.9"
+  }
+}
