@@ -21,6 +21,6 @@ html(lang="en", ng-app="simpleform")
 
   if is_dev
     script(src="js/client.concat.js")
-    script(src="//pulu.org:35729/livereload.js")
+    script(src="//#{host}:35729/livereload.js")
   else
     script(src="js/client.min.js")

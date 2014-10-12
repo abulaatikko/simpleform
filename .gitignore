@@ -1,6 +1,6 @@
 www_dev/
 www_prod/
-work/
+tmp/
 
 bower_components/
 node_modules/

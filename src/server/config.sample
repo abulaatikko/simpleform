@@ -1,11 +1,14 @@
+var config = {};
+
 config.env = 'dev';
+config.host = 'localhost';
 config.post = 3001;
 config.hostname = '';
 config.basePath = '/var/www/yourapp/';
  
 // mysql
 config.mysql = {};
-config.mysql.host = '';
+config.mysql.host = 'localhost';
 config.mysql.database = '';
 config.mysql.user = '';
 config.mysql.password = '';

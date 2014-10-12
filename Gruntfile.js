@@ -1,9 +1,11 @@
 module.exports = function(grunt) {
 
+    var config = require('./www_dev/server/config');
+
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         clean: {
-            work: ["work/*"],
+            tmp: ["tmp/*"],
             www_prod: [
                 "www_prod/*",
                 "!www_prod/server",
@@ -20,16 +22,16 @@ module.exports = function(grunt) {
             dev: {
                 options: {
                     pretty: true,
-                    data: {is_dev: true}
+                    data: {is_dev: true, host: config.host}
                 },
-                files: {"work/index.html": "src/client/index.jade"}
+                files: {"tmp/index.html": "src/client/index.jade"}
             },
             prod: {
                 options: {
                     pretty: true,
                     data: {is_prod: true}
                 },
-                files: {"work/index.html": "src/client/index.jade"}
+                files: {"tmp/index.html": "src/client/index.jade"}
             }        
         },
         jshint: {
@@ -43,20 +45,20 @@ module.exports = function(grunt) {
             www_dev: {
                 files: [
                     {src: 'src/server/server.js', dest: 'www_dev/server/server.js'},
-                    {src: 'work/client.concat.js', dest: 'www_dev/client/js/client.concat.js'},
-                    {src: 'work/client.concat.css', dest: 'www_dev/client/css/client.concat.css'},
+                    {src: 'tmp/client.concat.js', dest: 'www_dev/client/js/client.concat.js'},
+                    {src: 'tmp/client.concat.css', dest: 'www_dev/client/css/client.concat.css'},
                     {expand: true, cwd: 'bower_components/bootstrap/', src: 'fonts/**', dest: 'www_dev/client/'},
-                    {src: 'work/index.html', dest: 'www_dev/client/index.html'},
+                    {src: 'tmp/index.html', dest: 'www_dev/client/index.html'},
                     {expand: true, cwd: 'src/client/', src: 'partials/*', dest: 'www_dev/client/'}
                 ]
             },
             www_prod: {
                 files: [
                     {src: 'src/server/server.js', dest: 'www_prod/server/server.js'},
-                    {src: 'work/client.min.js', dest: 'www_prod/client/js/client.min.js'},
-                    {src: 'work/client.min.css', dest: 'www_prod/client/css/client.min.css'},
+                    {src: 'tmp/client.min.js', dest: 'www_prod/client/js/client.min.js'},
+                    {src: 'tmp/client.min.css', dest: 'www_prod/client/css/client.min.css'},
                     {expand: true, cwd: 'bower_components/bootstrap/', src: 'fonts/**', dest: 'www_prod/client/'},
-                    {src: 'work/index.html', dest: 'www_prod/client/index.html'},
+                    {src: 'tmp/index.html', dest: 'www_prod/client/index.html'},
                     {expand: true, cwd: 'src/client/', src: 'partials/*', dest: 'www_prod/client/'}
                 ]
             }
@@ -82,21 +84,21 @@ module.exports = function(grunt) {
                     'src/client/js/main.js',
                     'src/client/js/controllers.js'
                 ],
-                dest: 'work/client.concat.js'
+                dest: 'tmp/client.concat.js'
             },
             css: {
                 src: ['bower_components/**/*.css', 'src/**/*.css'],
-                dest: 'work/client.concat.css'
+                dest: 'tmp/client.concat.css'
             }
         },
         uglify: {
             prod: {
-                files: {'work/client.min.js': ['work/client.concat.js']}
+                files: {'tmp/client.min.js': ['tmp/client.concat.js']}
             }
         },
         cssmin: {
             prod: {
-                files: {'work/client.min.css': ['work/client.concat.css']}
+                files: {'tmp/client.min.css': ['tmp/client.concat.css']}
             }
         }
     });
@@ -111,7 +113,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
   
     grunt.registerTask('dev', [
-        'clean:work',
+        'clean:tmp',
         'jade:dev',
         'jshint', 
         'concat:js_client',
@@ -122,7 +124,7 @@ module.exports = function(grunt) {
     ]);
 
     grunt.registerTask('prod', [
-        'clean:work',
+        'clean:tmp',
         'jade:prod',
         'jshint',
         'concat:js_client',
