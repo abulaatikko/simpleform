@@ -1,94 +1,94 @@
-{
-    "label": "What's your biggest corcern?",
-    "id": "MainCorcern",
-    "name": "MainCorcern",
-    "type": "select",
-    "options": [
-        {
-            "label": "Health",
-            "value": "health",
-            "nextStep": [
-                {
-                    "label": "Oh damn, what's wrong with you?",
-                    "id": "Health",
-                    "name": "Health",
-                    "type": "select",
-                    "options": [
-                        {
-                            "label": "Back pain",
-                            "value": "back-pain",
-                            "nextStep": [
-                                {
-                                    "label": "How many hours of sport you do per week?",
-                                    "id": "SportHoursPerWeek",
-                                    "name": "SportHoursPerWeek",
-                                    "type": "checkbox",
-                                    "options": [
-                                        {
-                                            "label": "less than 5",
-                                            "value": "less-than-5"
-                                        },
-                                        {
-                                            "label": "5+",
-                                            "value": "more-than-5"
-                                        }
-                                    ]
-                                }
-                            ]
-                        },
-                        {
-                            "label": "Sanity",
-                            "value": "sanity",
-                            "nextStep": [
-                                {
-                                    "label": "What's your age?",
-                                    "id": "Age",
-                                    "name": "Age",
-                                    "type": "text"  
-                                },
-                                {
-                                    "label": "Write a poem.",
-                                    "id": "Poem",
-                                    "name": "Poem",
-                                    "type": "textarea"
-                                }
-                            ]
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "label": "Money",
-            "value": "money",
-            "nextStep": [
-                {
-                    "label": "Poor man! What's the problem?",
-                    "id": "Money",
-                    "name": "Money",
-                    "type": "select",
-                    "options": [
-                        {
-                            "label": "I've got too little",
-                            "value": "too-little"
-                        },
-                        {
-                            "label": "I've got too much",
-                            "value": "too-much"
-                        }
-                    ]
-                }
-            ]
-        },
-        {
-            "label": "Wife",
-            "value": "wife",
-            "nextStep": [
-                {
-                    "label": "Sorry, nothing to do.",
-                    "value": "nothing-to-do"
-                }
-            ]
-        }
-    ]
-}
+[
+    {
+        "label": "What's your biggest concern?",
+        "id": "MainConcern",
+        "name": "MainConcern",
+        "type": "select",
+        "options": [
+            {
+                "label": "Health",
+                "value": "health",
+                "nextStep": ["Health"]
+            },
+            {
+                "label": "Money",
+                "value": "money",
+                "nextStep": ["Money"]
+            },
+            {
+                "label": "Wife",
+                "value": "wife",
+                "nextStep": ["NothingToDo"]
+            }
+        ]
+    },
+    {
+        "label": "Oh damn, what's wrong with you?",
+        "id": "Health",
+        "name": "Health",
+        "type": "select",
+        "options": [
+            {
+                "label": "Back pain",
+                "value": "back-pain",
+                "nextStep": ["SportHoursPerWeek"]
+            },
+            {
+                "label": "Sanity",
+                "value": "sanity",
+                "nextStep": ["Age", "Poem"]
+            }
+        ]
+    },
+    {
+        "label": "Poor man! What's the problem?",
+        "id": "Money",
+        "name": "Money",
+        "type": "select",
+        "options": [
+            {
+                "label": "I've got too little",
+                "value": "too-little"
+            },
+            {
+                "label": "I've got too much",
+                "value": "too-much"
+            }
+        ]
+    },
+    {
+        "label": "Sorry, nothing to do.",
+        "id": "NothingToDo",
+        "name": "NothingToDo",
+        "value": "period",
+        "type": "hidden"
+    },
+    {
+        "label": "How many hours of sport you do per week?",
+        "id": "SportHoursPerWeek",
+        "name": "SportHoursPerWeek",
+        "type": "radio",
+        "options": [
+            {
+                "label": "less than 5",
+                "value": "less-than-5"
+            },
+            {
+                "label": "more than 5 or 5",
+                "value": "more-than-5"
+            }
+        ]
+    },
+    {
+        "label": "What's your age?",
+        "id": "Age",
+        "name": "Age",
+        "type": "text"
+    },
+    {
+        "label": "Write a poem.",
+        "id": "Poem",
+        "name": "Poem",
+        "type": "textarea"
+    }
+]
