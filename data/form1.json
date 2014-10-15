@@ -1,48 +1,48 @@
 [
     {
         "label": "What's your biggest concern?",
-        "id": "MainConcern",
+        "id": "main-concern",
         "name": "MainConcern",
         "type": "select",
         "options": [
             {
                 "label": "Health",
                 "value": "health",
-                "nextStep": ["Health"]
+                "nextSteps": ["health"]
             },
             {
                 "label": "Money",
                 "value": "money",
-                "nextStep": ["Money"]
+                "nextSteps": ["money"]
             },
             {
                 "label": "Wife",
                 "value": "wife",
-                "nextStep": ["NothingToDo"]
+                "nextSteps": ["nothing-to-do"]
             }
         ]
     },
     {
         "label": "Oh damn, what's wrong with you?",
-        "id": "Health",
+        "id": "health",
         "name": "Health",
         "type": "select",
         "options": [
             {
                 "label": "Back pain",
                 "value": "back-pain",
-                "nextStep": ["SportHoursPerWeek"]
+                "nextSteps": ["sport-hours-per-week"]
             },
             {
                 "label": "Sanity",
                 "value": "sanity",
-                "nextStep": ["Age", "Poem"]
+                "nextSteps": ["age", "poem"]
             }
         ]
     },
     {
         "label": "Poor man! What's the problem?",
-        "id": "Money",
+        "id": "money",
         "name": "Money",
         "type": "select",
         "options": [
@@ -58,14 +58,14 @@
     },
     {
         "label": "Sorry, nothing to do.",
-        "id": "NothingToDo",
+        "id": "nothing-to-do",
         "name": "NothingToDo",
         "value": "period",
         "type": "hidden"
     },
     {
         "label": "How many hours of sport you do per week?",
-        "id": "SportHoursPerWeek",
+        "id": "sport-hours-per-week",
         "name": "SportHoursPerWeek",
         "type": "radio",
         "options": [
@@ -81,13 +81,13 @@
     },
     {
         "label": "What's your age?",
-        "id": "Age",
+        "id": "age",
         "name": "Age",
         "type": "text"
     },
     {
         "label": "Write a poem.",
-        "id": "Poem",
+        "id": "poem",
         "name": "Poem",
         "type": "textarea"
     }
