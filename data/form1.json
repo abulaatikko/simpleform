@@ -8,17 +8,17 @@
             {
                 "label": "Health",
                 "value": "health",
-                "nextSteps": ["health"]
+                "nextFields": ["health"]
             },
             {
                 "label": "Money",
                 "value": "money",
-                "nextSteps": ["money"]
+                "nextFields": ["money"]
             },
             {
                 "label": "Wife",
                 "value": "wife",
-                "nextSteps": ["nothing-to-do"]
+                "nextFields": ["nothing-to-do"]
             }
         ]
     },
@@ -31,12 +31,12 @@
             {
                 "label": "Back pain",
                 "value": "back-pain",
-                "nextSteps": ["sport-hours-per-week"]
+                "nextFields": ["sport-hours-per-week", "health-backpain-submit"]
             },
             {
                 "label": "Sanity",
                 "value": "sanity",
-                "nextSteps": ["age", "poem"]
+                "nextFields": ["age", "poem", "health-sanity-submit"]
             }
         ]
     },
@@ -48,11 +48,13 @@
         "options": [
             {
                 "label": "I've got too little",
-                "value": "too-little"
+                "value": "too-little",
+                "nextFields": ["money-toolittle-submit"]
             },
             {
                 "label": "I've got too much",
-                "value": "too-much"
+                "value": "too-much",
+                "nextFields": ["money-toomuch-submit"]
             }
         ]
     },
@@ -90,5 +92,29 @@
         "id": "poem",
         "name": "Poem",
         "type": "textarea"
+    },
+    {
+        "label": "",
+        "id": "health-backpain-submit",
+        "name": "submit",
+        "type": "submit"
+    },
+    {
+        "label": "",
+        "id": "health-sanity-submit",
+        "name": "submit",
+        "type": "submit"
+    },
+    {
+        "label": "",
+        "id": "money-toomuch-submit",
+        "name": "submit",
+        "type": "submit"
+    },
+    {
+        "label": "",
+        "id": "money-toolittle-submit",
+        "name": "submit",
+        "type": "submit"
     }
 ]

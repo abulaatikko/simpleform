@@ -25,9 +25,9 @@ app.controller('FormCtrl', function($scope, $http) {
 
             if (typeof form[k].options !== "undefined" && form[k].options) {
                 for (j = 0; j < form[k].options.length; j++) {
-                    if (typeof form[k].options[j].nextSteps !== "undefined" && form[k].options[j].nextSteps) {
-                        for (i = 0; i < form[k].options[j].nextSteps.length; i++) {
-                            if (isChildShown(form[k].options[j].nextSteps[i], maxIterations)) {
+                    if (typeof form[k].options[j].nextFields !== "undefined" && form[k].options[j].nextFields) {
+                        for (i = 0; i < form[k].options[j].nextFields.length; i++) {
+                            if (isChildShown(form[k].options[j].nextFields[i], maxIterations)) {
                                 return true;
                             }
                         }
@@ -44,12 +44,12 @@ app.controller('FormCtrl', function($scope, $http) {
 
         var i, j, k = 0;
 
-        // first find field's nextSteps
-        var nextSteps = [];
+        // first find field's nextFields
+        var nextFields = [];
         for (i = 0; i < options.length; i++) {
             if (options[i].value == field.value) {
-                if (typeof options[i].nextSteps !== "undefined") {
-                    nextSteps = options[i].nextSteps;
+                if (typeof options[i].nextFields !== "undefined") {
+                    nextFields = options[i].nextFields;
                 }
                 i = options.length;
             }
@@ -62,8 +62,8 @@ app.controller('FormCtrl', function($scope, $http) {
             } else {
                 $scope.form[j].show = false;
                 // show the nextStep fields
-                for (i = 0; i < nextSteps.length; i++) {
-                    if ($scope.form[j].id == nextSteps[i]) {
+                for (i = 0; i < nextFields.length; i++) {
+                    if ($scope.form[j].id == nextFields[i]) {
                         $scope.form[j].show = true;
                     }
                 }
