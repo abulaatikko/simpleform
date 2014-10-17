@@ -22,14 +22,11 @@ app.controller('FormCtrl', function($scope, $http) {
             if (form[k].show) {
                 return true;
             }
-console.log('FIELDID:' + fieldId);
 
             if (typeof form[k].options !== "undefined" && form[k].options) {
                 for (var j = 0; j < form[k].options.length; j++) {
                     if (typeof form[k].options[j].nextSteps !== "undefined" && form[k].options[j].nextSteps) {
-//console.log(form[k].options[j].nextSteps);
                         for (var i = 0; i < form[k].options[j].nextSteps.length; i++) {
-console.log('HUM: ' + form[k].options[j].nextSteps[i]);
                             if (isChildShown(form[k].options[j].nextSteps[i])) {
                                 return true;
                             }
@@ -42,14 +39,14 @@ console.log('HUM: ' + form[k].options[j].nextSteps[i]);
         return false;
     }
 
-    $scope.showNextSteps = function(field, value) {
+    $scope.showNextSteps = function(field) {
 $s = new Date().getTime();
         var options = field.options;
 
         // first find field's nextSteps
         var nextSteps = [];
         for (var i = 0; i < options.length; i++) {
-            if (options[i].value == value) {
+            if (options[i].value == field.value) {
                 if (typeof options[i].nextSteps !== "undefined") {
                     nextSteps = options[i].nextSteps;
                 }
@@ -57,33 +54,31 @@ $s = new Date().getTime();
             }
         }
 
-        // hide all fields except the field itself
-        for (i = 0; i < $scope.form.length; i++) {
-            if ($scope.form[i].id == field.id) {
-                $scope.form[i].show = true;
+        for (var j = 0; j < $scope.form.length; j++) {
+            if ($scope.form[j].id == field.id) {
+                $scope.form[j].show = true;
             } else {
-                $scope.form[i].show = false;
+                $scope.form[j].show = false;
             }
-        }
-
-        // show the nextStep fields
-        for (i = 0; i < nextSteps.length; i++) {
-            for (var j = 0; j < $scope.form.length; j++) {
+            // show the nextStep fields
+            for (i = 0; i < nextSteps.length; i++) {
                 if ($scope.form[j].id == nextSteps[i]) {
                     $scope.form[j].show = true;
                 }
             }
         }
-        
-
-        // show all the parent fields of the shown fields
-        for (i = 0; i < $scope.form.length; i++) {
-            if (isChildShown($scope.form[i].id)) {
-                $scope.form[i].show = true;
+        for (j = 0; j < $scope.form.length; j++) {
+            if (isChildShown($scope.form[j].id)) {
+                $scope.form[j].show = true;
             }
         }
-console.log($scope.form);
-        
+        // empty values
+        for (j = 0; j < $scope.form.length; j++) {
+            if ($scope.form[j].show === false) {
+                $scope.form[j].value = false;
+            }
+        }
+
 $e = new Date().getTime();
 console.log($e-$s + ' ms');
     };
