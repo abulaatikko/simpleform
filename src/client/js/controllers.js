@@ -7,37 +7,18 @@ app.controller('FormCtrl', function($scope, $http) {
         });
     }
 
-    function isChildShown(fieldId, maxIterations) {
-        if (maxIterations-- < 0) {
-            return false;
-        }
-        var form = $scope.form;
-        var i, j, k = 0;
-
-        for (k = 0; k < form.length; k++) {
-            if (form[k].id != fieldId) {
-                continue;
-            }
-
-            if (form[k].show) {
-                return true;
-            }
-
-            if (typeof form[k].options !== "undefined" && form[k].options) {
-                for (j = 0; j < form[k].options.length; j++) {
-                    if (typeof form[k].options[j].nextFields !== "undefined" && form[k].options[j].nextFields) {
-                        for (i = 0; i < form[k].options[j].nextFields.length; i++) {
-                            if (isChildShown(form[k].options[j].nextFields[i], maxIterations)) {
-                                return true;
-                            }
-                        }
-                    }
-                }
-            }
-        }
-       
-        return false;
-    }
+    $scope.description = '';
+    $scope.image = null;
+    $scope.name = '';
+    $scope.fileUploading = false;
+    $scope.submit = function(hum) {
+        console.log(hum);
+        console.log($scope.description, $scope.name);
+        $scope.fileUploading = false;
+    };
+    $scope.loading = function() {
+        $scope.fileUploading = true;
+    };
 
     $scope.showNextSteps = function(field) {
         var options = field.options;
@@ -85,6 +66,38 @@ app.controller('FormCtrl', function($scope, $http) {
             }
         }
     };
+
+    function isChildShown(fieldId, maxIterations) {
+        if (maxIterations-- < 0) {
+            return false;
+        }
+        var form = $scope.form;
+        var i, j, k = 0;
+
+        for (k = 0; k < form.length; k++) {
+            if (form[k].id != fieldId) {
+                continue;
+            }
+
+            if (form[k].show) {
+                return true;
+            }
+
+            if (typeof form[k].options !== "undefined" && form[k].options) {
+                for (j = 0; j < form[k].options.length; j++) {
+                    if (typeof form[k].options[j].nextFields !== "undefined" && form[k].options[j].nextFields) {
+                        for (i = 0; i < form[k].options[j].nextFields.length; i++) {
+                            if (isChildShown(form[k].options[j].nextFields[i], maxIterations)) {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+        }
+       
+        return false;
+    }
 
     init();
 

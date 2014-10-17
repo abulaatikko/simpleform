@@ -1,14 +1,14 @@
 <h1 class="text-center">Ciao {{yourName}}!</h1>
 
-<form role="form">
+<form role="form" ng-upload="submit(content)" ng-upload-loading="loading()" action="/upload-full-form" ng-controller="FormCtrl">
     <div class="form-group">
         <div class="row">
             <div class="col-sm-9">
-                <label for="yourName">Your name</label>
-                <input type="text" ng-model="yourName" id="yourName" class="form-control">
+                <label for="name">Your name</label>
+                <input type="text" ng-model="name" id="name" class="form-control">
             </div>
             <div class="col-sm-3">
-                <span ng-show="yourName" class="glyphicon glyphicon-ok yourNameGiven"></span>
+                <span ng-show="name" class="glyphicon glyphicon-ok nameGiven"></span>
             </div>
         </div>
     </div>
@@ -18,7 +18,7 @@
     </div>
     <div class="form-group">
         <label>Description</label>
-        <textarea name="description" class="form-control"></textarea>
+        <textarea ng-model="description" name="description" class="form-control"></textarea>
     </div>
     <div class="form-group" ng-repeat="field in form" ng-show="field.show || field.id == 'main-concern'">
         <label>{{ field.label }}</label>
@@ -32,6 +32,6 @@
         <div ng-if="field.type == 'radio'" ng-repeat="option in field.options" id="{{ field.id }}" class="radio">
             <label><input type="radio" ng-model="field.value" name="{{ field.name }}" value="{{ option.value }}"> {{ option.label }}</label>
         </div>
-        <input ng-if="field.type == 'submit'" type="submit" name="{{ field.name }}" id="{{ field.id }}" value="Submit" class="form-control btn btn-primary">
+        <input ng-if="field.type == 'submit'" type="submit" name="{{ field.name }}" id="{{ field.id }}" value="Submit" class="btn btn-primary btn-lg btn-block" ng-disabled="fileUploading">
     </div>
 </form>
