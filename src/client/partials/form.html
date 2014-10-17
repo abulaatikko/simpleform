@@ -26,11 +26,11 @@
             <option value=""></option>
             <option ng-repeat="option in field.options" value="{{ option.value }}">{{ option.label }}</option>
         </select>
-        <input ng-if="field.type == 'text'" type="text" name="{{ field.name }}" value="{{ field.value }}" id="{{ field.id }}" class="form-control">
-        <input ng-if="field.type == 'hidden'" type="hidden" name="{{ field.name }}" value="{{ field.value }}" id="{{ field.id }}" class="form-control">
-        <textarea ng-if="field.type == 'textarea'" name="{{ field.name }}" id="{{ field.id }}" class="form-control">{{ field.value }}</textarea>
+        <input ng-if="field.type == 'text'" ng-model="field.value" type="text" name="{{ field.name }}" value="{{ field.value }}" id="{{ field.id }}" class="form-control">
+        <input ng-if="field.type == 'hidden'" ng-model="field.value" type="hidden" name="{{ field.name }}" value="{{ field.value }}" id="{{ field.id }}" class="form-control">
+        <textarea ng-if="field.type == 'textarea'" ng-model="field.value" name="{{ field.name }}" id="{{ field.id }}" class="form-control">{{ field.value }}</textarea>
         <div ng-if="field.type == 'radio'" ng-repeat="option in field.options" id="{{ field.id }}" class="radio">
-            <label><input type="radio" name="{{ field.name }}" value="{{ option.value }}"> {{ option.label }}</label>
+            <label><input type="radio" ng-model="field.value" name="{{ field.name }}" value="{{ option.value }}"> {{ option.label }}</label>
         </div>
     </div>
 </form>
