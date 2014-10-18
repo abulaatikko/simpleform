@@ -4,6 +4,7 @@ var path = require('path');
 var mysql = require('mysql');
 var myConnection = require('express-myconnection');
 var fs = require('fs');
+var multiparty = require('multiparty');
 
 // config
 var config = require('./config');
@@ -38,6 +39,14 @@ router.get('/form/:id', function(req, res, next) {
 });
 
 // route: form handler
+router.post('/answer', function(req, res) {
+    var form = new multiparty.Form();
+
+    form.parse(req, function(error, fields, files) {
+        console.log(fields, files, fields, 'asnwer');
+        res.end();
+    });
+});
 
 // route: landing page
 router.use(function(req, res, next) {
