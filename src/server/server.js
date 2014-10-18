@@ -37,6 +37,8 @@ router.get('/form/:id', function(req, res, next) {
     });
 });
 
+// route: form handler
+
 // route: landing page
 router.use(function(req, res, next) {
     res.sendFile(path.join(__dirname, '../client/index.html'));

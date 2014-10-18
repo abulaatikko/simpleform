@@ -82,7 +82,9 @@ module.exports = function(grunt) {
                     'bower_components/jquery/dist/jquery.js',
                     'bower_components/bootstrap/dist/js/bootstrap.js',
                     'src/client/js/main.js',
-                    'src/client/js/controllers.js'
+                    'src/client/js/controllers.js',
+                    'src/client/js/services.js',
+                    'src/client/js/directives.js'
                 ],
                 dest: 'tmp/client.concat.js'
             },

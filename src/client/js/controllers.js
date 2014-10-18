@@ -1,4 +1,4 @@
-app.controller('FormCtrl', function($scope, $http) {
+app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $http, fileUpload) {
 
     function init() {
         $scope.form = [];
@@ -11,13 +11,18 @@ app.controller('FormCtrl', function($scope, $http) {
     $scope.image = null;
     $scope.name = '';
     $scope.fileUploading = false;
-    $scope.submit = function(hum) {
-        console.log(hum);
-        console.log($scope.description, $scope.name);
-        $scope.fileUploading = false;
-    };
-    $scope.loading = function() {
+    $scope.submit = function() {
         $scope.fileUploading = true;
+        console.log($scope.description, $scope.name);
+        
+        var file = $scope.image;
+        console.log('file is ' + JSON.stringify(file));
+        var uploadUrl = "/answer";
+        fileUpload.uploadFileToUrl(file, uploadUrl, function(response) {
+            $scope.fileUploading = false;
+        }, function(response) {
+            console.log('error', response);
+        });
     };
 
     $scope.showNextSteps = function(field) {
@@ -101,4 +106,4 @@ app.controller('FormCtrl', function($scope, $http) {
 
     init();
 
-});
+}]);
