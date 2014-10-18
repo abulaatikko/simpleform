@@ -26,7 +26,7 @@ app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
             }
         }
         
-        var file = $scope.image;
+        var file = $scope.image ? $scope.image : null;
 
         fileUpload.uploadFileToUrl('/answer', fields, file, function(response) {
             $scope.fileUploading = false;

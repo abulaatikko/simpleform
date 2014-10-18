@@ -6,7 +6,9 @@ app.service('fileUpload', ['$http', function ($http) {
                 fd.append(key, fields[i][key]);
             }
         }
-        fd.append('file', file);
+        if (file) {
+            fd.append('file', file);
+        }
 
         $http({
             url: url,

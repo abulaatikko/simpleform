@@ -13,4 +13,15 @@ config.mysql.database = '';
 config.mysql.user = '';
 config.mysql.password = '';
 
+// gmail
+config.gmail = {};
+config.gmail.username = '';
+config.gmail.password = '';
+
+config.email = {};
+config.email.fromName = '';
+config.email.fromEmail = '';
+config.email.to = '';
+config.email.subject = '';
+
 module.exports = config;
