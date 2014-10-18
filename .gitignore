@@ -1,5 +1,5 @@
-www_dev/
-www_prod/
+dev/
+dist/
 tmp/
 
 bower_components/

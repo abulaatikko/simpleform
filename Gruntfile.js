@@ -1,21 +1,21 @@
 module.exports = function(grunt) {
 
-    var config = require('./www_dev/server/config');
+    var config = require('./dev/server/config');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
         clean: {
             tmp: ["tmp/*"],
-            www_prod: [
-                "www_prod/*",
-                "!www_prod/server",
-                "!www_prod/server/config"
+            dist: [
+                "dist/*",
+                "!dist/server",
+                "!dist/server/config"
             ],
-            www_dev: [
-                "www_dev/*", 
-                "!www_dev/server",
-                "!www_dev/server/config", 
-                "!www_dev/server/server.js" // we overwrite server.js to get it restarted by nodemon
+            dev: [
+                "dev/*", 
+                "!dev/server",
+                "!dev/server/config", 
+                "!dev/server/server.js" // we overwrite server.js to get it restarted by nodemon
             ]
         },
         jade: {
@@ -42,24 +42,24 @@ module.exports = function(grunt) {
             ]
         },
         copy: {
-            www_dev: {
+            dev: {
                 files: [
-                    {src: 'src/server/server.js', dest: 'www_dev/server/server.js'},
-                    {src: 'tmp/client.concat.js', dest: 'www_dev/client/js/client.concat.js'},
-                    {src: 'tmp/client.concat.css', dest: 'www_dev/client/css/client.concat.css'},
-                    {expand: true, cwd: 'bower_components/bootstrap/', src: 'fonts/**', dest: 'www_dev/client/'},
-                    {src: 'tmp/index.html', dest: 'www_dev/client/index.html'},
-                    {expand: true, cwd: 'src/client/', src: 'partials/*', dest: 'www_dev/client/'}
+                    {src: 'src/server/server.js', dest: 'dev/server/server.js'},
+                    {src: 'tmp/client.concat.js', dest: 'dev/client/js/client.concat.js'},
+                    {src: 'tmp/client.concat.css', dest: 'dev/client/css/client.concat.css'},
+                    {expand: true, cwd: 'bower_components/bootstrap/', src: 'fonts/**', dest: 'dev/client/'},
+                    {src: 'tmp/index.html', dest: 'dev/client/index.html'},
+                    {expand: true, cwd: 'src/client/', src: 'partials/*', dest: 'dev/client/'}
                 ]
             },
-            www_prod: {
+            dist: {
                 files: [
-                    {src: 'src/server/server.js', dest: 'www_prod/server/server.js'},
-                    {src: 'tmp/client.min.js', dest: 'www_prod/client/js/client.min.js'},
-                    {src: 'tmp/client.min.css', dest: 'www_prod/client/css/client.min.css'},
-                    {expand: true, cwd: 'bower_components/bootstrap/', src: 'fonts/**', dest: 'www_prod/client/'},
-                    {src: 'tmp/index.html', dest: 'www_prod/client/index.html'},
-                    {expand: true, cwd: 'src/client/', src: 'partials/*', dest: 'www_prod/client/'}
+                    {src: 'src/server/server.js', dest: 'dist/server/server.js'},
+                    {src: 'tmp/client.min.js', dest: 'dist/client/js/client.min.js'},
+                    {src: 'tmp/client.min.css', dest: 'dist/client/css/client.min.css'},
+                    {expand: true, cwd: 'bower_components/bootstrap/', src: 'fonts/**', dest: 'dist/client/'},
+                    {src: 'tmp/index.html', dest: 'dist/client/index.html'},
+                    {expand: true, cwd: 'src/client/', src: 'partials/*', dest: 'dist/client/'}
                 ]
             }
         },
@@ -120,8 +120,8 @@ module.exports = function(grunt) {
         'jshint', 
         'concat:js_client',
         'concat:css',
-        'clean:www_dev',
-        'copy:www_dev',
+        'clean:dev',
+        'copy:dev',
         'watch'
     ]);
 
@@ -133,8 +133,8 @@ module.exports = function(grunt) {
         'concat:css',
         'uglify:prod',
         'cssmin:prod',
-        'clean:www_prod',
-        'copy:www_prod'
+        'clean:dist',
+        'copy:dist'
     ]);
 
 };
