@@ -2,7 +2,7 @@
     {
         "label": "What's your biggest concern?",
         "id": "main-concern",
-        "name": "MainConcern",
+        "name": "mainConcern",
         "type": "select",
         "options": [
             {
@@ -25,7 +25,7 @@
     {
         "label": "Oh damn, what's wrong with you?",
         "id": "health",
-        "name": "Health",
+        "name": "health",
         "type": "select",
         "options": [
             {
@@ -43,7 +43,7 @@
     {
         "label": "Poor man! What's the problem?",
         "id": "money",
-        "name": "Money",
+        "name": "money",
         "type": "select",
         "options": [
             {
@@ -61,14 +61,14 @@
     {
         "label": "Sorry, nothing to do.",
         "id": "nothing-to-do",
-        "name": "NothingToDo",
+        "name": "nothingToDo",
         "value": "period",
         "type": "hidden"
     },
     {
         "label": "How many hours of sport you do per week?",
         "id": "sport-hours-per-week",
-        "name": "SportHoursPerWeek",
+        "name": "sportHoursPerWeek",
         "type": "radio",
         "options": [
             {
@@ -84,13 +84,13 @@
     {
         "label": "What's your age?",
         "id": "age",
-        "name": "Age",
+        "name": "age",
         "type": "text"
     },
     {
         "label": "Write a poem.",
         "id": "poem",
-        "name": "Poem",
+        "name": "poem",
         "type": "textarea"
     },
     {
