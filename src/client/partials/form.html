@@ -20,7 +20,7 @@
         <label>Description</label>
         <textarea ng-model="description" name="description" class="form-control"></textarea>
     </div>
-    <div class="form-group" ng-repeat="field in form" ng-show="field.show || field.id == 'main-concern'">
+    <div class="form-group" ng-repeat="field in form" ng-show="field.show || $first">
         <label>{{ field.label }}</label>
         <select ng-if="field.type == 'select'" ng-model="field.value" ng-change="showNextFields(field)" name="{{ field.name }}" id="{{ field.id }}" class="form-control">
             <option value=""></option>
