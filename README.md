@@ -3,11 +3,11 @@ simpleform
 
 A project to build a stack for a simple form using nodejs and angular.
 
-# Article
+## Article
 
 [http://palsta.pulu.org/en/37-a-stack-needed-for-a-simple-form-using-angularjs-and-mysql](http://palsta.pulu.org/en/37-a-stack-needed-for-a-simple-form-using-angularjs-and-mysql)
 
-# Installation
+## Installation
 
 ```
 git checkout https://github.com/lassiheikkinen/simpleform.git
@@ -16,7 +16,7 @@ npm install
 bower install
 ```
 
-# Running development
+## Running development
 
 ```
 mkdir -p dev/server
@@ -26,7 +26,7 @@ nodemon dev/server/server.js
 grunt dev
 ```
 
-# Running production
+## Running production
 
 ```
 mkdir -p dist/server
