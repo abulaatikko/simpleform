@@ -13,7 +13,7 @@ A project to build a stack for a simple form using nodejs and angular.
 git checkout https://github.com/lassiheikkinen/simpleform.git
 cd simpleform
 npm install
-bower install 
+bower install
 ```
 
 ## Running development
