@@ -94,14 +94,10 @@ module.exports = function(grunt) {
             }
         },
         uglify: {
-            prod: {
-                files: {'tmp/client.min.js': ['tmp/client.concat.js']}
-            }
+            files: {src: ['tmp/client.concat.js'], dest: 'tmp/client.min.js'}
         },
         cssmin: {
-            prod: {
-                files: {'tmp/client.min.css': ['tmp/client.concat.css']}
-            }
+            files: {src: ['tmp/client.concat.css'], dest: 'tmp/client.min.css'}
         }
     });
     
@@ -131,8 +127,8 @@ module.exports = function(grunt) {
         'jshint',
         'concat:js_client',
         'concat:css',
-        'uglify:prod',
-        'cssmin:prod',
+        'uglify',
+        'cssmin',
         'clean:dist',
         'copy:dist'
     ]);

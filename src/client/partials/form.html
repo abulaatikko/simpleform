@@ -22,7 +22,7 @@
     </div>
     <div class="form-group" ng-repeat="field in form" ng-show="field.show || field.id == 'main-concern'">
         <label>{{ field.label }}</label>
-        <select ng-if="field.type == 'select'" ng-model="field.value" ng-change="showNextSteps(field)" name="{{ field.name }}" id="{{ field.id }}" class="form-control">
+        <select ng-if="field.type == 'select'" ng-model="field.value" ng-change="showNextFields(field)" name="{{ field.name }}" id="{{ field.id }}" class="form-control">
             <option value=""></option>
             <option ng-repeat="option in field.options" value="{{ option.value }}">{{ option.label }}</option>
         </select>

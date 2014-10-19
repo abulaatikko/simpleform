@@ -35,7 +35,7 @@ app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
         });
     };
 
-    $scope.showNextSteps = function(field) {
+    $scope.showNextFields = function(field) {
         var options = field.options;
 
         var i, j, k = 0;
@@ -51,13 +51,13 @@ app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
             }
         }
 
-        // show the field itself and the nextStep fields but hide the rest
+        // show the field itself and the nextFields fields but hide the rest
         for (j = 0; j < $scope.form.length; j++) {
             if ($scope.form[j].id == field.id) {
                 $scope.form[j].show = true;
             } else {
                 $scope.form[j].show = false;
-                // show the nextStep fields
+                // show the nextFields fields
                 for (i = 0; i < nextFields.length; i++) {
                     if ($scope.form[j].id == nextFields[i]) {
                         $scope.form[j].show = true;
@@ -65,10 +65,10 @@ app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
                 }
             }
         }
-        // show all the fields whose child in nextStep tree is shown
+        // show all the fields whose child field in nextFields tree is shown
         for (j = 0; j < $scope.form.length; j++) {
             var maxIterations = 100;
-            if (isChildShown($scope.form[j].id, maxIterations)) {
+            if (isChildFieldShown($scope.form[j].id, maxIterations)) {
                 $scope.form[j].show = true;
             }
         }
@@ -82,7 +82,7 @@ app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
         }
     };
 
-    function isChildShown(fieldId, maxIterations) {
+    function isChildFieldShown(fieldId, maxIterations) {
         if (maxIterations-- < 0) {
             return false;
         }
@@ -102,7 +102,7 @@ app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
                 for (j = 0; j < form[k].options.length; j++) {
                     if (typeof form[k].options[j].nextFields !== "undefined" && form[k].options[j].nextFields) {
                         for (i = 0; i < form[k].options[j].nextFields.length; i++) {
-                            if (isChildShown(form[k].options[j].nextFields[i], maxIterations)) {
+                            if (isChildFieldShown(form[k].options[j].nextFields[i], maxIterations)) {
                                 return true;
                             }
                         }
