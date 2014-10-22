@@ -16,8 +16,7 @@ app.service('fileUpload', ['$http', function ($http) {
             data: fd,
             transformRequest: angular.identity,
             headers: {'Content-Type': undefined}
-        })
-        .then(
+        }).then(
             function(res) {success(res);},
             function(res) {error(res);}
         );
