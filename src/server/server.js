@@ -85,7 +85,7 @@ var sendEmail = function(body, files, next) {
     };
 
     transporter.sendMail(emailOptions, function(error, info){
-        if (error){
+        if (error) {
             console.log(error, info);
             next(info, error);
         } else {

@@ -67,6 +67,7 @@ module.exports = function(grunt) {
             files: [
                 'Gruntfile.js',
                 'src/**',
+                'test/**'
             ],
             tasks: ['dev'],
             options: {
@@ -75,10 +76,11 @@ module.exports = function(grunt) {
             }
         },
         concat: {
-            js_client: {
+            js: {
                 src: [
                     'bower_components/angular/angular.js',
                     'bower_components/angular-ui-router/release/angular-ui-router.js',
+                    'bower_components/angular-mocks/angular-mocks.js',
                     'bower_components/jquery/dist/jquery.js',
                     'bower_components/bootstrap/dist/js/bootstrap.js',
                     'src/client/js/main.js',
@@ -98,6 +100,20 @@ module.exports = function(grunt) {
         },
         cssmin: {
             files: {src: ['tmp/client.concat.css'], dest: 'tmp/client.min.css'}
+        },
+        karma: {
+            continuous: {
+                singleRun: true,
+                browsers: ['PhantomJS'],
+                runnerPort: 9876,
+                logLevel: 'INFO',
+                autoWatch: false,
+                reporters: ['progress'],
+                frameworks: ['jasmine'],
+                options: {
+                    files: ['tmp/client.concat.js', 'test/**/*.js']
+                }
+            }
         }
     });
     
@@ -109,15 +125,17 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
+    grunt.loadNpmTasks('grunt-karma');
   
     grunt.registerTask('dev', [
         'clean:tmp',
         'jade:dev',
         'jshint', 
-        'concat:js_client',
+        'concat:js',
         'concat:css',
         'clean:dev',
         'copy:dev',
+        'karma:continuous',
         'watch'
     ]);
 
@@ -125,7 +143,7 @@ module.exports = function(grunt) {
         'clean:tmp',
         'jade:prod',
         'jshint',
-        'concat:js_client',
+        'concat:js',
         'concat:css',
         'uglify',
         'cssmin',

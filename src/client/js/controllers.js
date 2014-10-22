@@ -14,24 +14,23 @@ app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
     $scope.submit = function() {
         $scope.fileUploading = true;
 
-        var fields = [];
-        fields.push({description: $scope.description});
-        fields.push({name: $scope.name});
+        $scope.fields = [];
+        $scope.fields.push({description: $scope.description});
+        $scope.fields.push({name: $scope.name});
     
         for (var i = 0; i < $scope.form.length; i++) {
             if (typeof $scope.form[i].value !== 'undefined' && $scope.form[i].value !== '') {
                 var obj = {};
                 obj[$scope.form[i].name] = $scope.form[i].value;
-                fields.push(obj);
+                $scope.fields.push(obj);
             }
         }
         
         var file = $scope.image ? $scope.image : null;
 
-        fileUpload.uploadFileToUrl('/answer', fields, file, function(response) {
+        fileUpload.uploadFileToUrl('/answer', $scope.fields, file, function(response) {
             $scope.fileUploading = false;
         }, function(response) {
-            console.log('error', response);
         });
     };
 
