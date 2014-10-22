@@ -1,4 +1,4 @@
-describe('Unit: FormCtrl', function() {
+describe('Unit: FormController', function() {
     beforeEach(module('simpleform'));
     
     var ctrl, scope, httpBackend;
@@ -6,7 +6,7 @@ describe('Unit: FormCtrl', function() {
         scope = $injector.get('$rootScope').$new();
         
         createController = function() {
-             return $injector.get('$controller')('FormCtrl', {$scope: scope });
+             return $injector.get('$controller')('FormController', {$scope: scope });
         }
 
         httpBackend = $injector.get('$httpBackend');

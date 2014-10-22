@@ -4,6 +4,6 @@ app.config(['$stateProvider', function($stateProvider) {
     $stateProvider.state('front', {
         url: "",
         templateUrl: "partials/form.html",
-        controller: 'FormCtrl'
+        controller: 'FormController'
     });
 }]);

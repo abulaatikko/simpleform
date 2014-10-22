@@ -1,4 +1,4 @@
-app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $http, fileUpload) {
+app.controller('FormController', ['$scope', '$http', 'fileUpload', function($scope, $http, fileUpload) {
 
     function init() {
         $scope.form = [];
@@ -7,16 +7,16 @@ app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
         });
     }
 
-    $scope.description = '';
-    $scope.image = null;
-    $scope.name = '';
-    $scope.fileUploading = false;
     $scope.submit = function() {
         $scope.fileUploading = true;
 
         $scope.fields = [];
-        $scope.fields.push({description: $scope.description});
-        $scope.fields.push({name: $scope.name});
+        if (typeof $scope.description !== 'undefined') {
+            $scope.fields.push({description: $scope.description});
+        }
+        if (typeof $scope.name !== 'undefined') {
+            $scope.fields.push({name: $scope.name});
+        }
     
         for (var i = 0; i < $scope.form.length; i++) {
             if (typeof $scope.form[i].value !== 'undefined' && $scope.form[i].value !== '') {
@@ -26,9 +26,7 @@ app.controller('FormCtrl', ['$scope', '$http', 'fileUpload', function($scope, $h
             }
         }
         
-        var file = $scope.image ? $scope.image : null;
-
-        fileUpload.uploadFileToUrl('/answer', $scope.fields, file, function(response) {
+        fileUpload.uploadFileToUrl('/answer', $scope.fields, $scope.file, function(response) {
             $scope.fileUploading = false;
         }, function(response) {
         });
