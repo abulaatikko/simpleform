@@ -76,17 +76,29 @@ module.exports = function(grunt) {
             }
         },
         concat: {
-            js: {
+            js_app: {
+                src: [
+                    'src/client/js/main.js',
+                    'src/client/js/controllers.js',
+                    'src/client/js/services.js',
+                    'src/client/js/directives.js'
+                ],
+                dest: 'tmp/app.concat.js'
+            },
+            js_vendor: {
                 src: [
                     'bower_components/angular/angular.js',
                     'bower_components/angular-ui-router/release/angular-ui-router.js',
                     'bower_components/angular-mocks/angular-mocks.js',
                     'bower_components/jquery/dist/jquery.js',
                     'bower_components/bootstrap/dist/js/bootstrap.js',
-                    'src/client/js/main.js',
-                    'src/client/js/controllers.js',
-                    'src/client/js/services.js',
-                    'src/client/js/directives.js'
+                ],
+                dest: 'tmp/vendor.concat.js'
+            },
+            js: {
+                src: [
+                    'tmp/vendor.concat.js',
+                    'tmp/app.concat.js'
                 ],
                 dest: 'tmp/client.concat.js'
             },
@@ -101,17 +113,15 @@ module.exports = function(grunt) {
         cssmin: {
             files: {src: ['tmp/client.concat.css'], dest: 'tmp/client.min.css'}
         },
-        karma: {
-            continuous: {
-                singleRun: true,
-                browsers: ['PhantomJS'],
-                runnerPort: 9876,
-                logLevel: 'INFO',
-                autoWatch: false,
-                reporters: ['progress'],
-                frameworks: ['jasmine'],
-                options: {
-                    files: ['tmp/client.concat.js', 'test/**/*.js']
+        jasmine: {
+            files: {src: 'tmp/app.concat.js'},
+            options: {
+                vendor: 'tmp/vendor.concat.js',
+                specs: 'test/unit/**/*.js',
+                template: require('grunt-template-jasmine-istanbul'),
+                templateOptions: {
+                    coverage: 'coverage/coverage.json',
+                    report: 'coverage'
                 }
             }
         }
@@ -125,17 +135,19 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-cssmin');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
-    grunt.loadNpmTasks('grunt-karma');
+    grunt.loadNpmTasks('grunt-contrib-jasmine');
   
     grunt.registerTask('dev', [
         'clean:tmp',
         'jade:dev',
         'jshint', 
+        'concat:js_app',
+        'concat:js_vendor',
         'concat:js',
         'concat:css',
         'clean:dev',
         'copy:dev',
-        'karma:continuous',
+        'jasmine',
         'watch'
     ]);
 
@@ -143,6 +155,8 @@ module.exports = function(grunt) {
         'clean:tmp',
         'jade:prod',
         'jshint',
+        'concat:js_app',
+        'concat:js_vendor',
         'concat:js',
         'concat:css',
         'uglify',
