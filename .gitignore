@@ -2,6 +2,7 @@ coverage/
 dev/
 dist/
 tmp/
+test/config
 
 bower_components/
 node_modules/

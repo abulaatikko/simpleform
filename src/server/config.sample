@@ -2,7 +2,7 @@ var config = {};
 
 config.env = 'dev';
 config.host = 'localhost';
-config.post = 3001;
+config.port = 3001;
 config.hostname = '';
 config.basePath = '/var/www/yourapp/';
  

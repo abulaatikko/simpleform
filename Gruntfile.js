@@ -117,11 +117,24 @@ module.exports = function(grunt) {
             files: {src: 'tmp/app.concat.js'},
             options: {
                 vendor: 'tmp/vendor.concat.js',
-                specs: 'test/unit/**/*.js',
+                specs: 'test/unit/client/*.js',
                 template: require('grunt-template-jasmine-istanbul'),
                 templateOptions: {
                     coverage: 'coverage/coverage.json',
                     report: 'coverage'
+                }
+            }
+        },
+        jasmine_node: {
+            server: ['test/unit/server/']
+        },
+        wait_server: {
+            dev: {
+                options: {
+                    url: 'http://' + config.host + ':' + config.port,
+                    timeout: 1000 * 10,
+                    interval: 100,
+                    print: false
                 }
             }
         }
@@ -136,6 +149,8 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
+    grunt.loadNpmTasks('grunt-jasmine-node');
+    grunt.loadNpmTasks('grunt-wait-server');
   
     grunt.registerTask('dev', [
         'clean:tmp',
@@ -147,7 +162,9 @@ module.exports = function(grunt) {
         'concat:css',
         'clean:dev',
         'copy:dev',
+        'wait_server:dev',
         'jasmine',
+        'jasmine_node:server',
         'watch'
     ]);
 

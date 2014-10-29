@@ -24,7 +24,10 @@
     "grunt-contrib-mincss": "^0.3.2",
     "grunt-contrib-uglify": "^0.6.0",
     "grunt-contrib-watch": "^0.6.1",
-    "grunt-template-jasmine-istanbul": "^0.3.0"
+    "grunt-jasmine-node": "^0.2.1",
+    "grunt-template-jasmine-istanbul": "^0.3.0",
+    "grunt-wait-server": "^0.1.2",
+    "request": "^2.47.0"
   },
   "dependencies": {
     "express": "^4.9.3",
