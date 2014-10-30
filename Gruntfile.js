@@ -140,7 +140,7 @@ module.exports = function(grunt) {
         },
         wait: {
             pause: {
-                options: {delay: 2000}
+                options: {delay: 500}
             }
         }
     });
@@ -156,7 +156,7 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-jasmine-node');
     grunt.loadNpmTasks('grunt-wait-server');
-grunt.loadNpmTasks('grunt-wait');
+    grunt.loadNpmTasks('grunt-wait');
   
     grunt.registerTask('dev', [
         'clean:tmp',
