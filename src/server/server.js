@@ -49,7 +49,7 @@ router.post('/answer', function(req, res) {
             body += key.toUpperCase() + ': ' + fields[key] + "\n";
         }
 
-        var filesArr = typeof files.file !== 'undefined' ? files.file : [];
+        var filesArr = typeof files !== 'undefined' && typeof files.file !== 'undefined' ? files.file : [];
         sendEmail(body, filesArr, function(info) {
             if (filesArr && filesArr[0] && typeof filesArr[0].path !== 'undefined') {
                 fs.unlink(filesArr[0].path);
@@ -84,7 +84,7 @@ var sendEmail = function(body, files, next) {
         attachments: attachments
     };
 
-    transporter.sendMail(emailOptions, function(error, info){
+    transporter.sendMail(emailOptions, function(error, info) {
         if (error) {
             console.log(error, info);
             next(info, error);
