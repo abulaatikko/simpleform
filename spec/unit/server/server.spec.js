@@ -1,4 +1,5 @@
 var request = require('request');
+var fs = require('fs');
 var config = require('../../../test/server/config');
 
 describe('server', function() {
@@ -22,8 +23,10 @@ describe('server', function() {
         var formData = {
             name: 'Matti Kutonen',
             description: 'Dataa',
-            something: 'else'
+            something: 'else',
+            file: fs.createReadStream(__dirname + '/../data/test.txt'),
         };
+
         request.post({url: 'http://' + config.host + ':' + config.port + '/answer', formData: formData}, function(error, response) {
             done();
         });

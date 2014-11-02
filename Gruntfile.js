@@ -175,6 +175,9 @@ module.exports = function(grunt) {
             pause_500: {
                 options: {delay: 500}
             },
+            pause_1000: {
+                options: {delay: 1000}
+            },
             pause_2000: {
                 options: {delay: 2000}
             }
@@ -224,11 +227,11 @@ module.exports = function(grunt) {
         'cssmin',
         'clean:test',
         'copy:test',
-        'wait:pause_500',
+        'wait:pause_1000',
         'wait_server:test',
-        'wait:pause_500',
+        'wait:pause_1000',
         'jasmine',
-        'wait:pause_500',
+        'wait:pause_1000',
         'jasmine_node:server',
         'clean:test',
     ]);
