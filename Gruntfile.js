@@ -1,6 +1,7 @@
 module.exports = function(grunt) {
 
-    var config = require('./dev/server/config');
+    var devConfig = require('./dev/server/config');
+    var testConfig = require('./test/server/config');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -16,13 +17,19 @@ module.exports = function(grunt) {
                 "!dev/server",
                 "!dev/server/config", 
                 "!dev/server/server.js" // we overwrite server.js to get it restarted by nodemon
-            ]
+            ],
+            test: [
+                "test/*",
+                "!test/server",
+                "!test/server/config",
+                "!test/server/server.js" // we overwrite server.js to get it restarted by nodemon
+            ],
         },
         jade: {
             dev: {
                 options: {
                     pretty: true,
-                    data: {is_dev: true, host: config.host}
+                    data: {is_dev: true, host: devConfig.host}
                 },
                 files: {"tmp/index.html": "src/client/index.jade"}
             },
@@ -32,13 +39,21 @@ module.exports = function(grunt) {
                     data: {is_prod: true}
                 },
                 files: {"tmp/index.html": "src/client/index.jade"}
-            }        
+            },
+            test: {
+                options: {
+                    pretty: true,
+                    data: {is_test: true}
+                },
+                files: {"tmp/index.html": "src/client/index.jade"}     
+            }
         },
         jshint: {
             files: [
                 'Gruntfile.js', 
                 'src/client/**/*.js', 
-                'src/server/**/*.js'
+                'src/server/**/*.js',
+                'spec/**/*.js'
             ]
         },
         copy: {
@@ -61,13 +76,23 @@ module.exports = function(grunt) {
                     {src: 'tmp/index.html', dest: 'dist/client/index.html'},
                     {expand: true, cwd: 'src/client/', src: 'partials/*', dest: 'dist/client/'}
                 ]
+            },
+            test: {
+                files: [
+                    {src: 'src/server/server.js', dest: 'test/server/server.js'},
+                    {src: 'tmp/client.min.js', dest: 'test/client/js/client.min.js'},
+                    {src: 'tmp/client.min.css', dest: 'test/client/css/client.min.css'},
+                    {expand: true, cwd: 'bower_components/bootstrap/', src: 'fonts/**', dest: 'test/client/'},
+                    {src: 'tmp/index.html', dest: 'test/client/index.html'},
+                    {expand: true, cwd: 'src/client/', src: 'partials/*', dest: 'test/client/'}
+                ]
             }
         },
         watch: {
             files: [
                 'Gruntfile.js',
                 'src/**',
-                'test/**'
+                'spec/**'
             ],
             tasks: ['dev'],
             options: {
@@ -103,7 +128,7 @@ module.exports = function(grunt) {
                 dest: 'tmp/client.concat.js'
             },
             css: {
-                src: ['bower_components/**/*.css', 'src/**/*.css'],
+                src: ['bower_components/**/*.min.css', 'src/**/*.css'],
                 dest: 'tmp/client.concat.css'
             }
         },
@@ -117,7 +142,7 @@ module.exports = function(grunt) {
             files: {src: 'tmp/app.concat.js'},
             options: {
                 vendor: 'tmp/vendor.concat.js',
-                specs: 'test/unit/client/*.js',
+                specs: 'spec/unit/client/*.js',
                 template: require('grunt-template-jasmine-istanbul'),
                 templateOptions: {
                     coverage: 'coverage/coverage.json',
@@ -126,12 +151,20 @@ module.exports = function(grunt) {
             }
         },
         jasmine_node: {
-            server: ['test/unit/server/']
+            server: ['spec/unit/server/']
         },
         wait_server: {
             dev: {
                 options: {
-                    url: 'http://' + config.host + ':' + config.port,
+                    url: 'http://' + devConfig.host + ':' + devConfig.port,
+                    timeout: 1000 * 10,
+                    interval: 100,
+                    print: false
+                }
+            },
+            test: {
+                options: {
+                    url: 'http://' + testConfig.host + ':' + testConfig.port,
                     timeout: 1000 * 10,
                     interval: 100,
                     print: false
@@ -139,8 +172,11 @@ module.exports = function(grunt) {
             }
         },
         wait: {
-            pause: {
+            pause_500: {
                 options: {delay: 500}
+            },
+            pause_2000: {
+                options: {delay: 2000}
             }
         }
     });
@@ -162,16 +198,9 @@ module.exports = function(grunt) {
         'clean:tmp',
         'jade:dev',
         'jshint', 
-        'concat:js_app',
-        'concat:js_vendor',
-        'concat:js',
-        'concat:css',
+        'concate_all',
         'clean:dev',
         'copy:dev',
-        'wait:pause',
-        'wait_server:dev',
-        'jasmine',
-        'jasmine_node:server',
         'watch'
     ]);
 
@@ -179,14 +208,36 @@ module.exports = function(grunt) {
         'clean:tmp',
         'jade:prod',
         'jshint',
-        'concat:js_app',
-        'concat:js_vendor',
-        'concat:js',
-        'concat:css',
+        'concate_all',
         'uglify',
         'cssmin',
         'clean:dist',
         'copy:dist'
+    ]);
+
+    grunt.registerTask('test', [
+        'clean:tmp',
+        'jade:test',
+        'jshint',
+        'concate_all',
+        'uglify',
+        'cssmin',
+        'clean:test',
+        'copy:test',
+        'wait:pause_500',
+        'wait_server:test',
+        'wait:pause_500',
+        'jasmine',
+        'wait:pause_500',
+        'jasmine_node:server',
+        'clean:test',
+    ]);
+
+    grunt.registerTask('concate_all', [
+        'concat:js_app',
+        'concat:js_vendor',
+        'concat:js',
+        'concat:css',
     ]);
 
 };

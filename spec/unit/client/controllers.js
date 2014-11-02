@@ -7,7 +7,7 @@ describe('Unit: FormController', function() {
         
         createController = function() {
              return $injector.get('$controller')('FormController', {$scope: scope });
-        }
+        };
 
         httpBackend = $injector.get('$httpBackend');
 

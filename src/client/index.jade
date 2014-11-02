@@ -13,6 +13,8 @@ html(lang="en", ng-app="simpleform")
       .row
         if is_prod
           h2(class="text-center bg-danger") Production
+        else if is_test
+          h2(class="text-center bg-danger") Test
         else
           h2(class="text-center bg-success") Development
       .row
