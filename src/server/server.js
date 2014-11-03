@@ -101,6 +101,6 @@ router.use(function(req, res, next) {
 });
 
 // launch server
-var server = app.listen(config.port, function() {
-    console.log('Listening on port %d', server.address().port);
+exports.server = app.listen(config.port, function() {
+    console.log('Listening on port %d', exports.server.address().port);
 });

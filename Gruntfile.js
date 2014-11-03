@@ -15,14 +15,13 @@ module.exports = function(grunt) {
             dev: [
                 "dev/*", 
                 "!dev/server",
-                "!dev/server/config", 
+                "!dev/server/config",
                 "!dev/server/server.js" // we overwrite server.js to get it restarted by nodemon
             ],
             test: [
                 "test/*",
                 "!test/server",
                 "!test/server/config",
-                "!test/server/server.js" // we overwrite server.js to get it restarted by nodemon
             ],
         },
         jade: {
@@ -153,35 +152,6 @@ module.exports = function(grunt) {
         jasmine_node: {
             server: ['spec/unit/server/']
         },
-        wait_server: {
-            dev: {
-                options: {
-                    url: 'http://' + devConfig.host + ':' + devConfig.port,
-                    timeout: 1000 * 10,
-                    interval: 100,
-                    print: false
-                }
-            },
-            test: {
-                options: {
-                    url: 'http://' + testConfig.host + ':' + testConfig.port,
-                    timeout: 1000 * 10,
-                    interval: 100,
-                    print: false
-                }
-            }
-        },
-        wait: {
-            pause_500: {
-                options: {delay: 500}
-            },
-            pause_1000: {
-                options: {delay: 1000}
-            },
-            pause_2000: {
-                options: {delay: 2000}
-            }
-        }
     });
     
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -194,8 +164,6 @@ module.exports = function(grunt) {
     grunt.loadNpmTasks('grunt-contrib-copy');
     grunt.loadNpmTasks('grunt-contrib-jasmine');
     grunt.loadNpmTasks('grunt-jasmine-node');
-    grunt.loadNpmTasks('grunt-wait-server');
-    grunt.loadNpmTasks('grunt-wait');
   
     grunt.registerTask('dev', [
         'clean:tmp',
@@ -227,13 +195,9 @@ module.exports = function(grunt) {
         'cssmin',
         'clean:test',
         'copy:test',
-        'wait:pause_1000',
-        'wait_server:test',
-        'wait:pause_1000',
         'jasmine',
-        'wait:pause_1000',
         'jasmine_node:server',
-        'clean:test',
+        'clean:test'
     ]);
 
     grunt.registerTask('concate_all', [
