@@ -2,6 +2,7 @@ module.exports = function(grunt) {
 
     var devConfig = require('./dev/server/config');
     var testConfig = require('./test/server/config');
+    var prodConfig = require('./dist/server/config');
 
     grunt.initConfig({
         pkg: grunt.file.readJSON('package.json'),
@@ -151,7 +152,7 @@ module.exports = function(grunt) {
         },
         jasmine_node: {
             server: ['spec/unit/server/']
-        },
+        }
     });
     
     grunt.loadNpmTasks('grunt-contrib-clean');
@@ -169,7 +170,7 @@ module.exports = function(grunt) {
         'clean:tmp',
         'jade:dev',
         'jshint', 
-        'concate_all',
+        'concat_all',
         'clean:dev',
         'copy:dev',
         'watch'
@@ -179,7 +180,7 @@ module.exports = function(grunt) {
         'clean:tmp',
         'jade:prod',
         'jshint',
-        'concate_all',
+        'concat_all',
         'uglify',
         'cssmin',
         'clean:dist',
@@ -190,17 +191,16 @@ module.exports = function(grunt) {
         'clean:tmp',
         'jade:test',
         'jshint',
-        'concate_all',
+        'concat_all',
         'uglify',
         'cssmin',
         'clean:test',
         'copy:test',
         'jasmine',
-        'jasmine_node:server',
-        'clean:test'
+        'jasmine_node:server'
     ]);
 
-    grunt.registerTask('concate_all', [
+    grunt.registerTask('concat_all', [
         'concat:js_app',
         'concat:js_vendor',
         'concat:js',

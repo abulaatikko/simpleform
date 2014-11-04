@@ -28,7 +28,7 @@ describe('server', function() {
             name: 'Matti Kutonen',
             description: 'Dataa',
             something: 'else',
-            file: fs.createReadStream(__dirname + '/../data/test.txt'),
+            file: fs.createReadStream(config.basePath + 'spec/data/sample1.txt'),
         };
 
         request.post({url: baseUrl + '/answer', formData: formData}, function(error, response) {
