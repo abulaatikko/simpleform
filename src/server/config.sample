@@ -1,6 +1,6 @@
 var config = {};
 
-config.env = 'dev';
+config.env = 'dev'; // dev, prod, test
 config.host = 'localhost';
 config.port = 3001;
 config.basePath = '/var/www/yourapp/';
