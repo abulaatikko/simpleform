@@ -14,24 +14,33 @@ git checkout https://github.com/lassiheikkinen/simpleform.git
 cd simpleform
 npm install
 bower install
+mkdir -p dev/server
+mkdir -p dist/server
+mkdir -p test/server
+cp src/server/config.sample dev/server/config
+cp src/server/config.sample dist/server/config
+cp src/server/config.sample test/server/config
+vim dev/server/config
+vim dist/server/config
+vim test/server/config
 ```
 
 ## Running development
 
 ```
-mkdir -p dev/server
-mv srv/server/config.sample dev/server/config
-vim dev/server/config
-nodemon dev/server/server.js
 grunt dev
+nodemon dev/server/server.js (in other console)
 ```
 
 ## Running production
 
 ```
-mkdir -p dist/server
-mv srv/server/config.sample dist/server/config
-vim dist/server/config
 grunt prod
 forever start --uid "simpleform" --append -l /var/log/simpleform/forever.log -o /var/log/simpleform/debug.log -e /var/log/simpleform/error.log dist/server/server.js
+```
+
+## Running tests
+
+```
+grunt test
 ```
