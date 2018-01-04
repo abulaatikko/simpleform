@@ -5,7 +5,7 @@ A project to build a stack for a simple form using nodejs and angular.
 
 ## Article
 
-[http://palsta.pulu.org/en/37-a-stack-needed-for-a-simple-form-using-angularjs-and-mysql](http://palsta.pulu.org/en/37-a-stack-needed-for-a-simple-form-using-angularjs-and-mysql)
+[http://palsta.pulu.org/en/37-php-developer-in-javascript-world](http://palsta.pulu.org/en/37-php-developer-in-javascript-world)
 
 ## Installation
 
