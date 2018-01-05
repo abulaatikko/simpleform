@@ -34,7 +34,8 @@ router.use('/users', function(req, res, next) {
 
 // route: data provider
 router.get('/form/:id', function(req, res, next) {
-    fs.readFile(config.dataPath + 'form' + req.params.id + '.json', {encoding: 'utf8'}, function(err, data) {
+    var sanitizedId = +(req.params.id)
+    fs.readFile(config.dataPath + 'form' + sanitizedId + '.json', {encoding: 'utf8'}, function(err, data) {
         return res.json(JSON.parse(data));
     });
 });
